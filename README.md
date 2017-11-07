@@ -70,4 +70,4 @@ python post_nanaco_slack.py
 pipenv run python post_nanaco_slack.py
 ```
 
-![result](img.png)
+![result](https://github.com/tamago324/post_nanaco_slack/blob/master/img.png?raw=true)
