@@ -1,19 +1,22 @@
-#!/bin/usr/env python
+#!/usr/bin/env python
 
 from robobrowser import RoboBrowser
 import os
+from nanaco import Nanaco
+from slack_bot import SlackBot
 
 
 LOGIN_URL = 'https://www.nanaco-net.jp/pc/emServlet'
-# direnvなどを使い、環境変数に番号を格納しておく
-NANACO_NUM = os.environ['NANACO_NUM']
-SECURITY_CD = os.environ['SECURITY_CD']
 
 
 def main():
     browser = openbrowser(LOGIN_URL)
     login(browser)
-    display_balance(browser)
+    # Generate nanaco object
+    nanaco = generate_nanaco(browser)
+    slackBot = SlackBot('nanacoBot')
+    # post nanaco info
+    slackBot.post_nanaco_status(nanaco)
 
 def openbrowser(url):
     ''' Open url on RoboBrowser.
@@ -35,16 +38,9 @@ def login(browser, nanacoNum=None, securityCd=None):
     
     form = browser.get_form(id='login_card')
 
-    if nanacoNum is not None:
-        form['XCID'].value = nanacoNum
-    else:
-        form['XCID'].value = NANACO_NUM
-
-    if securityCd is not None:
-        form['SECURITY_CD'].value = securityCd
-    else:
-        form['SECURITY_CD'].value = SECURITY_CD
-
+    form['XCID'].value = os.environ['NANACO_NUM']
+    form['SECURITY_CD'].value = os.environ['SECURITY_CD']
+    
     browser.submit_form(form)
 
 
@@ -60,6 +56,20 @@ def display_balance(browser):
            f'残高：{balance}\n'
            f'ポイント残高：{point}'
            ))
+
+
+def generate_nanaco(browser):
+    ''' Generate nanaco object fo browser data
+    :param RoboBworser: Logined browser
+    :return: nanaco
+    '''
+    nanaco = Nanaco()
+    nanaco.time = browser.select('#cardzan > span.time')[0].text
+    nanaco.money = browser.select('#memberInfoFull > .detailBox > .moneyBox > .fRight > p')[0].text
+    nanaco.point = browser.select('#memberInfoFull > .detailBox > .pointBox > .fRight > p')[0].text
+
+    return nanaco
+
 
 
 if __name__ == '__main__':
