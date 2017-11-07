@@ -61,7 +61,7 @@ echo WEBHOOK_URU=webhookUrl > .env
 ```
 
 
-### Usage
+## Usage
 
 ```sh
 python post_nanaco_slack.py
@@ -70,4 +70,4 @@ python post_nanaco_slack.py
 pipenv run python post_nanaco_slack.py
 ```
 
-![result](https://github.com/tamago324/post_nanaco_slack/img.png)
+![result](post_nanaco_slack/img.png)
