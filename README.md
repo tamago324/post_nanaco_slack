@@ -4,17 +4,24 @@ nanaco balance display
 
 ## Usage
 
-Clone this repository.
+### Clone this repository
 
 ```sh
 git clone https://github.com/tamago324/nanaco_balance.git
 ```
 
-Use direnv.
-
-Click [here](http://tmg0525.hatenadiary.jp/entry/2017/11/07/020609) for how to install direnv
+### Set environment variables
 
 About the value to set [here](https://www.nanaco-net.jp/pc/emServlet)
+
+1.Use direnv
+2.Use Pipenv
+
+#### 1.Use direnv
+
+If you use direnv to set environment variables
+
+Click [here](http://tmg0525.hatenadiary.jp/entry/2017/11/07/020609) for how to install direnv
 
 ```sh
 cd nanaco_balance
@@ -29,13 +36,30 @@ Install required modules.
 pip install robobrowser
 ```
 
-Run program.
+#### 2.Use Pipenv
+
+If you use Pipenv to set environment variables
+
+Click [here](http://tmg0525.hatenadiary.jp/entry/2017/10/29/134453) for how to install pipenv
+
+```sh
+cd nanaco_balance
+pipenv install
+echo NANACO_NUM=nanacoNumber > .env
+echo SECURITY_CD=securityCd > .env
+```
+
+
+### Run program.
 
 ```sh
 python nanaco_zan.py
+
+# pipenv
+pipenv run python nanaco_zan.py
 ```
 
-Example result.
+e.g.
 
 ```
 2017年11月05日23時59分時点
