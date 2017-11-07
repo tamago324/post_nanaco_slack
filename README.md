@@ -1,10 +1,8 @@
 # nanaco_balance
 
-nanaco balance display
+Send nanaco balance information to Slack
 
-## Usage
-
-### Clone this repository
+## Installation
 
 ```sh
 git clone https://github.com/tamago324/nanaco_balance.git
@@ -12,25 +10,37 @@ git clone https://github.com/tamago324/nanaco_balance.git
 
 ### Set environment variables
 
-About the value to set [here](https://www.nanaco-net.jp/pc/emServlet)
+- 'NANACO_NUM'
+    nanaco number length 16
+- 'SECURITY_CD'
+    security cd length 6
+- 'WEBHOOK_URL'
+    send channel webhook url
+
+Click [here](https://www.nanaco-net.jp/pc/emServlet) for the value set for 'NANACO_NUM' and 'SECURITY_CD'.
+
+About the value set for 'WEBHOOK_URL'.
+
+Access [here](https://slack.com/services/new/incoming-webhook).Select the channel you want to send at 'Choose a channel', and click 'Add Incoming WebHooks integration'.The value of 'Webhook URL'.
 
 1.Use direnv
 2.Use Pipenv
 
-#### 1.Use direnv
+#### 1.use direnv
 
-If you use direnv to set environment variables
+if you use direnv to set environment variables
 
-Click [here](http://tmg0525.hatenadiary.jp/entry/2017/11/07/020609) for how to install direnv
+click [here](http://tmg0525.hatenadiary.jp/entry/2017/11/07/020609) for how to install direnv
 
 ```sh
 cd nanaco_balance
-echo "export NANACO_NUM='Number length 16'" > .envrc
-echo "export SECURITY_CD='Number length 6'" > .envrc
+echo "export nanaco_num='number length 16'" > .envrc
+echo "export security_cd='number length 6'" > .envrc
+echo "export webhook_url='webhook url'" > .envrc
 direnv allow .
 ```
 
-Install required modules.
+install required modules.
 
 ```sh
 pip install robobrowser
@@ -47,22 +57,17 @@ cd nanaco_balance
 pipenv install
 echo NANACO_NUM=nanacoNumber > .env
 echo SECURITY_CD=securityCd > .env
+echo WEBHOOK_URU=webhookUrl > .env
 ```
 
 
-### Run program.
+### Usage
 
 ```sh
-python nanaco_zan.py
+python post_nanaco_slack.py
 
 # pipenv
-pipenv run python nanaco_zan.py
+pipenv run python post_nanaco_slack.py
 ```
 
-e.g.
-
-```
-2017年11月05日23時59分時点
-残高：1,107円
-ポイント残高：451P
-```
+![result](https://github.com/tamago324/post_nanaco_slack/img.png)
