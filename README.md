@@ -1,4 +1,4 @@
-# nanaco_balance
+# post_nanaco_slack
 
 Send nanaco balance information to Slack
 
