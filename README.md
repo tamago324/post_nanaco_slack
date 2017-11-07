@@ -70,4 +70,4 @@ python post_nanaco_slack.py
 pipenv run python post_nanaco_slack.py
 ```
 
-![result](post_nanaco_slack/img.png)
+![result](img.png)
