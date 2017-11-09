@@ -51,8 +51,12 @@ def generate_nanaco(browser):
     '''
     nanaco = Nanaco()
     nanaco.time = browser.select('#cardzan > span.time')[0].text
-    nanaco.money = browser.select('#memberInfoFull > .detailBox > .moneyBox > .fRight > p')[0].text
-    nanaco.point = browser.select('#memberInfoFull > .detailBox > .pointBox > .fRight > p')[0].text
+
+    # 数値のみを取り出す
+    nanaco.money = int(browser.select('#memberInfoFull > .detailBox > .moneyBox > .fRight > p') \
+                   [0].text[:-1].replace(',',''))
+    nanaco.point = int(browser.select('#memberInfoFull > .detailBox > .pointBox > .fRight > p') \
+                   [0].text[:-1].replace(',',''))
 
     return nanaco
 

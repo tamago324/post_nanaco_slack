@@ -37,6 +37,6 @@ class SlackBot():
         if nanaco is None:
             payload['text'] = 'nanacoの情報が正しく取得できませんでした'
         else:
-            payload['text'] = f'{nanaco.money}/{nanaco.point}\n{nanaco.time}'
+            payload['text'] = f'{nanaco.money}円/{nanaco.point}P\n{nanaco.time}'
 
         return payload
