@@ -44,20 +44,6 @@ def login(browser, nanacoNum=None, securityCd=None):
     browser.submit_form(form)
 
 
-def display_balance(browser):
-    ''' Display balance yesterday at 23:59
-    :param RoboBworser: Logined browser
-    '''
-
-    time = browser.select('#cardzan > span.time')[0].text
-    balance = browser.select('#memberInfoFull > .detailBox > .moneyBox > .fRight > p')[0].text
-    point = browser.select('#memberInfoFull > .detailBox > .pointBox > .fRight > p')[0].text
-    print((f'{time}\n'
-           f'残高：{balance}\n'
-           f'ポイント残高：{point}'
-           ))
-
-
 def generate_nanaco(browser):
     ''' Generate nanaco object fo browser data
     :param RoboBworser: Logined browser
