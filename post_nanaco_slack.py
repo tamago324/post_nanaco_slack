@@ -7,6 +7,7 @@ from slack_bot import SlackBot
 
 
 LOGIN_URL = 'https://www.nanaco-net.jp/pc/emServlet'
+MIN_MONEY = 700
 
 
 def main():
@@ -14,9 +15,11 @@ def main():
     login(browser)
     # Generate nanaco object
     nanaco = generate_nanaco(browser)
-    slackBot = SlackBot('nanacoBot')
-    # post nanaco info
-    slackBot.post_nanaco_status(nanaco)
+
+    # 設定額よりも低かった場合送信
+    if nanaco.money <= MIN_MONEY:
+        slackBot = SlackBot('nanacoBot')
+        slackBot.post_nanaco_status(nanaco)
 
 def openbrowser(url):
     ''' Open url on RoboBrowser.
@@ -59,7 +62,6 @@ def generate_nanaco(browser):
                    [0].text[:-1].replace(',',''))
 
     return nanaco
-
 
 
 if __name__ == '__main__':
